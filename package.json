@@ -1,0 +1,191 @@
+{
+  "name": "ttk-electron-client",
+  "version": "9.0.2",
+  "description": "金财互联数据服务有限公司 粤ICP备14007298号",
+  "author": "金财互联数据服务有限公司",
+  "main": "dist/main.js",
+  "scripts": {
+    "start": "node_modules/.bin/electron . --inspect=5858",
+    "lint": "eslint --ext .js,.vue src",
+    "dev": "node build/webpack.dev.conf.js",
+    "postinstall": "electron-builder install-app-deps",
+    "dev:main": "webpack --config build/main/webpack.dev.conf.js",
+    "dev:preload": "webpack --config build/preload/webpack.dev.conf.js",
+    "dev:renderer": "webpack-dev-server --config build/renderer/webpack.dev.conf.js",
+    "build": "webpack --config build/webpack.prod.conf.js",
+    "build:main": "webpack --config build/main/webpack.prod.conf.js",
+    "build:preload": "webpack --config build/preload/webpack.prod.conf.js",
+    "build:renderer": "webpack --config build/renderer/webpack.prod.conf.js",
+    "pack": "electron-builder",
+    "release": "electron-builder"
+  },
+  "keywords": [
+    "platform",
+    "linux",
+    "macOS",
+    "Windows"
+  ],
+  "dependencies": {
+    "@babel/runtime": "^7.7.7",
+    "axios": "^0.19.0",
+    "electron-log": "^4.2.4",
+    "electron-pdf-window": "^1.0.12",
+    "electron-screenshots": "^0.0.5",
+    "electron-updater": "^4.2.0",
+    "element-ui": "^2.13.2",
+    "lodash": "^4.17.19",
+    "normalize.css": "^8.0.1",
+    "nprogress": "^0.2.0",
+    "vue": "^2.6.11"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.7",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/plugin-proposal-export-default-from": "^7.7.4",
+    "@babel/plugin-transform-runtime": "^7.7.6",
+    "@babel/preset-env": "^7.7.7",
+    "autoprefixer": "^9.7.3",
+    "babel-eslint": "^10.0.3",
+    "babel-loader": "^8.0.6",
+    "chalk": "^3.0.0",
+    "css-loader": "^3.4.1",
+    "electron": "^6.1.7",
+    "electron-builder": "^22.3.5",
+    "electron-debug": "^3.1.0",
+    "electron-dev-webpack-plugin": "^1.0.4",
+    "electron-devtools-installer": "^2.2.4",
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-friendly-formatter": "^4.0.1",
+    "eslint-loader": "^3.0.3",
+    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "eslint-plugin-vue": "^6.1.2",
+    "file-loader": "^5.0.2",
+    "friendly-errors-webpack-plugin": "^1.7.0",
+    "html-webpack-plugin": "^3.2.0",
+    "less": "^3.10.3",
+    "less-loader": "^5.0.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "postcss-loader": "^3.0.0",
+    "pug": "^2.0.4",
+    "pug-plain-loader": "^1.0.0",
+    "registry-auth-token": "^4.0.0",
+    "registry-url": "^5.1.0",
+    "url-loader": "^3.0.0",
+    "vue-loader": "^15.8.3",
+    "vue-template-compiler": "^2.6.11",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.1",
+    "webpack-merge": "^4.2.2"
+  },
+  "build": {
+    "appId": "com.electron.platform",
+    "productName": "金财管家",
+    "artifactName": "platform-${version}-${channel}-${arch}.${ext}",
+    "copyright": "Copyright © 金财管家2020",
+    "asar": true,
+    "directories": {
+      "buildResources": "resources/icons",
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "resources/tray/*",
+      "resources/logo.png"
+    ],
+    "publish": {
+      "provider": "generic",
+      "owner": "jeffycai",
+      "repo": "platform",
+      "url": "http://127.0.0.1:8080/packages/download/"
+    },
+    "dmg": {
+      "contents": [
+        {
+          "x": 410,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 130,
+          "y": 150,
+          "type": "file"
+        }
+      ]
+    },
+    "mac": {
+      "target": ["dmg","zip"],
+      "icon": "./resources/icons/icon.icns",
+      "category": "public.app-category.instant-messaging",
+      "artifactName": "${productName}_setup_${version}.${ext}"
+    },
+    "win": {
+      "icon": "./resources/icons/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64",
+            "ia32",
+            "arm64",
+            "armv7l"
+          ]
+        },
+        {
+          "target": "deb",
+          "arch": [
+            "x64",
+            "ia32",
+            "arm64",
+            "armv7l"
+          ]
+        },
+        {
+          "target": "rpm",
+          "arch": [
+            "x64",
+            "ia32",
+            "arm64",
+            "armv7l"
+          ]
+        }
+      ],
+      "executableName": "platform",
+      "icon": "./resources/icons",
+      "category": "InstantMessaging;Network"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true,
+      "displayLanguageSelector": true,
+      "language": 2052,
+      "include": "build/installer.nsh"
+    }
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeffycai/platform.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jeffycai/platform/issues"
+  },
+  "homepage": "https://erp.jchl.com/#/edfx-app-root/edfx-app-agreement"
+}

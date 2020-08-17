@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>金财管家</title>
+</head>
+
+<body style="overflow: hidden;border: 0px; margin: 0">
+	<div id="electron-main-window">
+		<div class="operation-top" style="width: 100%;height: 20px;overflow: hidden;"></div><iframe id="electron-iframe"
+			src="https://erp.jchl.com/#/edfx-app-root/edfx-app-login" frameborder="0" align="middle" width="100%"
+			height="0"></iframe>
+	</div>
+	<div id="app"></div>
+	<script>
+		const { ipcRenderer } = require('electron');
+		window.ttkclient = true;
+		let iframe = document.getElementById('electron-iframe')
+
+		window.addEventListener('resize', (e) => {
+			iframe.style.height = (window.innerHeight - 16) + 'px'
+		})
+
+		window.addEventListener('message', (event) => {
+			if (event.data && event.data.windowMax) {
+				ipcRenderer.send('icpRender-message', 'icpRender-message')
+			}
+			if (event.data && event.data.pdfPrint) {
+				ipcRenderer.send('icpRender-pdfPrint', event.data.url)
+			}
+			if (event.data && event.data.openNewWin) {
+				ipcRenderer.send('icpRender-newWin', event.data.url)
+			}
+			if (event.data && event.data.downloadsth) {
+				ipcRenderer.send('icpRender-download', event.data.url)
+			}
+			if (event.data && event.data.pdfLoad) {
+				ipcRenderer.send('icpRender-pdfLoad', event.data.url)
+			}
+		})
+
+		window.onload = () => {
+			ipcRenderer.send('main-window-onlaod', 'main-window-onlaod')
+
+			let frame = window.frames['electron-iframe'];
+			frame.contentWindow.postMessage('electron-app', '*');
+		}
+		ipcRenderer.on('main-window-hidden', (event, arg) => {
+			if (arg === 'hidden') {
+				let mainWindow = document.getElementById('electron-main-window')
+				mainWindow.style.display = 'none'
+			}
+		})</script>
+</body>
+
+</html>
