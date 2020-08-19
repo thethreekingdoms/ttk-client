@@ -7,13 +7,19 @@ import mainWin from './mainWin'
 import emailWin from './emailWin'
 import errorWin from './errorWin'
 import aboutWin from './aboutWin'
+import updateWin from './updateWin'
 import shortcut from './shortcut'
 import settingWin from './settingWin'
 import ttkclientTray from './ttkclientTray'
 import closeWin from './closeWin'
 import Screenshots from 'electron-screenshots'
-import autoUpdater from './autoUpdate'
 
+// const autoUpdater = require('electron-updater').autoUpdater;
+// var log = require('electron-log')
+// log.transports.console.level = false
+// log.transports.console.level = 'silly'
+
+// const updateURL = 'http://127.0.0.1:8080/packages/download/'
 export default class ttkclient {
   // app对象是否ready
   _ready = null
@@ -29,14 +35,15 @@ export default class ttkclient {
   $settingWin = null
   // 关于窗口
   $aboutWin = null
+  //升级窗口
+  $updateWin=null
   // 关闭提示窗口
   $closeWin = null
   // 截图对象
   $screenshots = null
   // 网络情况，默认为null，必须等到页面报告状态
   online = null
-  //自动更新问题
-  $autoUpdater = null
+
   // 默认配置
   setting = {
     autoupdate: true,
@@ -64,7 +71,6 @@ export default class ttkclient {
       this.initScreenshots()
       this.initNotify()
       this.bindShortcut()
-      // this.initAutoUpdaterCheck()
     })
   }
 
@@ -120,21 +126,19 @@ export default class ttkclient {
   }
 
 
-  /**
-   * 自动更新检测
-   */
 
-  initAutoUpdaterCheck() {
-    this.$autoUpdater = new autoUpdater();
-  }
+
 
   /**
    * 初始化消息提示
    */
   initNotify() {
+    console.log('initNotify');
     this.$notify = new Notify()
     ipcMain.on('notify', (e, body) => this.$notify.show(body))
     this.$notify.on('click', () => this.showMainWin())
+
+    // this.handleUpdate()
   }
 
   /**
@@ -192,6 +196,8 @@ export default class ttkclient {
          */
         this.showErrorWin()
       }
+
+      // this.updateHandle()
     }
   }
 
@@ -256,6 +262,14 @@ export default class ttkclient {
   showAboutWin() {
     this.$aboutWin = aboutWin(this)()
   }
+
+  /**
+   * 显示升级窗口
+   */
+  showUpdateWin() {
+    this.$updateWin = updateWin(this)()
+  }
+
 
   /**
    * 显示关闭窗口

@@ -36,24 +36,28 @@ export default class ttkclientTray {
   setMenu() {
     const menu = [
       {
-        label: '打开主窗口',
+        label: '显示窗口',
         click: () => this._ttkclient.showMainWin()
       },
+      // {
+      //   label: '系统设置',
+      //   click: () => this._ttkclient.showSettingWin()
+      // },
       {
-        label: '系统设置',
-        click: () => this._ttkclient.showSettingWin()
+        label: '升级',
+        click: () => this._ttkclient.showUpdateWin()
       },
       {
-        label: '关于',
+        label:'关于金财管家',
         click: () => this._ttkclient.showAboutWin()
       },
       {
-        label: '退出',
+        label: '退出程序',
         click: () => this._ttkclient.quit()
       }
     ]
 
-    if (this._ttkclient.setting.enableCapture) {
+    if (this._ttkclient.setting.enableCapture && false) {
       menu.splice(1, 0, {
         label: '屏幕截图',
         click: () => this._ttkclient.screenshotsCapture()

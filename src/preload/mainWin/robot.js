@@ -11,10 +11,10 @@ export default injector => {
   document.body.append(iframe)
 
   const download = debounce(url => {
-    if (url.indexOf('https://erp.jchl.com/vendor/download') === 0) {
+    if (url.indexOf('https://space.ttkclient.com/auth/download') === 0) {
       iframe.src = url
       return true
-    } else if (url.indexOf('https://erp.jchl.com/vendor/attachment') === 0) {
+    } else if (url.indexOf('https://space.ttkclient.com/attachment') === 0) {
       iframe.src = url
       return true
     }

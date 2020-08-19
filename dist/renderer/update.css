@@ -29,58 +29,96 @@
     right:0;
     display:block;
     top:50%;
-    width:500px;
-    height:300px;
+    width:630px;
     margin:0 auto;
     margin-top:-150px;
-    background-color:#0f3c71;
-    border-radius:10px;
-    padding:25px;
-    box-sizing:border-box
+    background-color:#ffffff;
+    box-sizing:border-box;
+    border:1px solid #d3d3d3;
 }
+.bgTitle{
+    background: #0280E1;
+    height: 97px;
+}
+.bgCenter{
+    height:225px;
+    margin-top:80px;
+}
+.bgCenter2{
+    height: 225px;
+    margin-top: 80px;
+    text-align: left;
+    margin: 10px 25px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
 .process .contents .before {
     text-align:left;
     color:#fff
 }
+.s1{
+    font-family: 'Microsoft YaHei';
+    font-size: 13px;
+    color: #FFFFFF;
+    letter-spacing: 0.64px;
+    padding-left: 8px;
+}
+.s2{
+    background-image: url('../../resources/banner.jpg');
+    background-position: center;
+    margin: 10px auto;
+    height: 45px;
+    background-repeat: no-repeat;
+}
 .process .contents .nextVersion{
     font-size: 12px;
-    color: #c00000;
+    color: #0280E1;
 }
 .process .contents progress {
-    width:450px;
-    height:30px;
-    color:#f00;
-    background:red;
-    border-radius:15px;
+    width:581px;
+    height:14px;
+    color:#0280E1;
+    border-radius: 3.5px;
     overflow:hidden;
-    margin-top:50px;
-    transition:all .3s
+    transition:all .3s;
+    background: #D3D3D3;
 }
 .process .contents progress::-webkit-progress-bar {
     background-color:#f2f2f2;
 }
 .process .contents progress::-webkit-progress-value {
-    background:#a21211;
+    background:#0280E1;
 }
 .process .contents progress::-moz-progress-bar {
-    background-color:#f00;
+    background-color:#0280E1;
 }
-.process .contents .update-btn {
-    margin-top:80px;
-    text-align: center;
+.process .contents .update-btn{
+    width: 95%;
+    /* height: 35px; */
+    border-radius: 2px;
+    font-size: 16px;
+    text-align: right;
+    margin-bottom: 20px;
+    margin-right: 20px;
+
 }
 .process .contents .update-btn .btn {
-    border:0;
-    outline: none;
-    width:150px;
-    padding:8px 0;
-    margin:0 auto;
-    background:#fff;
-
-    box-shadow:0 2px 40px 6px rgba(255,255,255,0.3);
-    border-radius:10px;
+    height: 35px;
+    background-color: #0280E1;
+    color:#fff;
+    cursor: pointer;
+    width: 95px;
+    border: 1px solid #0280e1;
+}
+.process .contents .update-btn .btn:hover {
+    background-color: #065a9a;
+}
+.process .contents .update-btn .btn2 {
+    height: 35px;
+    background-color: #ffffff;
     color:#000;
-    font-size:18px;
-    text-align:center;
-    cursor:pointer
+    cursor: pointer;
+    width: 95px;
+    border: 1px solid #0280e1;
 }

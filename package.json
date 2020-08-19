@@ -1,6 +1,6 @@
 {
   "name": "ttk-electron-client",
-  "version": "9.0.2",
+  "version": "0.0.2",
   "description": "金财互联数据服务有限公司 粤ICP备14007298号",
   "author": "金财互联数据服务有限公司",
   "main": "dist/main.js",
@@ -119,7 +119,10 @@
       ]
     },
     "mac": {
-      "target": ["dmg","zip"],
+      "target": [
+        "dmg",
+        "zip"
+      ],
       "icon": "./resources/icons/icon.icns",
       "category": "public.app-category.instant-messaging",
       "artifactName": "${productName}_setup_${version}.${ext}"

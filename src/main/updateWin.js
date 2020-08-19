@@ -2,7 +2,7 @@ import path from 'path'
 import logo from './logo'
 import contextMenu from './contextMenu'
 // import { autoUpdater } from 'electron-updater'
-import { app, BrowserWindow, ipcMain, dialog} from 'electron'
+import { app, BrowserWindow, ipcMain, dialog, ipcRenderer } from 'electron'
 
 // var log = require('electron-log')
 // log.transports.console.level = false
@@ -19,11 +19,12 @@ export default ttkclient => () => {
   }
   const $win = new BrowserWindow({
     title: "升级",
-    width: 320,
-    height: 360,
+    width: 630,
+    height: 420,
     useContentSize: true,
-    resizable: true,
+    resizable: false,
     menu: false,
+    frame: false,
     parent: ttkclient.$mainWin,
     modal: process.platform !== 'darwin',
     show: false,
@@ -51,6 +52,8 @@ export default ttkclient => () => {
   $win.webContents.on('did-finish-load', () => {
     $win.webContents.send('staticData', { "version": pkg.version });
   })
+
+
   handleUpdate($win)
 
 
@@ -106,7 +109,7 @@ function handleUpdate(e) {
   })
 
   // 当发现一个可用更新的时候触发，更新下载包会自动开始
-  autoUpdater.autoDownload = true
+  autoUpdater.autoDownload = false;
   autoUpdater.on('update-available', (info) => {
     sendUpdateMessage({ action: 'updateAva', updateInfo: info })
   })
@@ -139,14 +142,19 @@ function handleUpdate(e) {
   })
 
   ipcMain.on('checkForUpdate', () => {
-    console.log('1111111');
+    // console.log('1111111');
     autoUpdater.checkForUpdates();
   })
 
   ipcMain.on('downloadUpdate', () => {
-    console.log('downloadUpdate')
+    // console.log('downloadUpdate')
     autoUpdater.downloadUpdate();
   })
+  ipcMain.on('window-close', () => {
+    // console.log('close close')
+    e.close();
+  })
+
 
   // //执行自动更新检查
   // autoUpdater.checkForUpdates();

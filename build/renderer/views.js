@@ -10,10 +10,14 @@ const views = [
   {
     key: 'aboutWin',
     title: '金财管家'
-  }, 
+  },
+  {
+    key:'updateWin',
+    title:'升级'
+  },
   {
     key: 'closeWin',
-    title: '友情提示'
+    title: '关闭'
   }
 ]
 

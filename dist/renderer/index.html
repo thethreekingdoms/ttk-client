@@ -5,36 +5,106 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<title>金财管家</title>
+	<link href="./update.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body style="overflow: hidden;border: 0px; margin: 0">
 	<div id="electron-main-window">
 		<div class="operation-top" style="width: 100%;height: 20px;overflow: hidden;"></div><iframe id="electron-iframe"
-			src="https://erp.jchl.com/#/edfx-app-root/edfx-app-login" frameborder="0" align="middle" width="100%"
-			height="0"></iframe>
+			src="https://erp.jchl.com/" frameborder="0" align="middle" width="100%" height="0"></iframe>
 	</div>
-	<div id="app"></div>
+
+	<div id="updateTips" style="display: none;">
+		<div id="app"></div>
+		<div id="update-app">
+			<div class="process">
+				<div class="masks"></div>
+				<div class="contents">
+					<div class="bgTitle">
+						<div class="before">
+							<span id="current-version" style="display: none;">当前版本:</span><span class="s1">系统更新</span>
+						</div>
+						<div class="nextVersion" id="nextVersion" style="display: none;">
+							发现最新版本:
+
+						</div>
+						<div style="font-size: 12px; overflow: hidden;color: #fff;">
+							<div class="s2"></div>
+						</div>
+
+					</div>
+					<div class="bgCenter">
+						<div
+							style="font-size: 16px;color: #333333;letter-spacing: 0.79px; text-align: left;padding-left: 25px;">
+							正在下载安装</div>
+						<progress id="update-progress" value='0' max='100'></progress>
+					</div>
+					<div class="bgFooter" style="display: none;">
+						<div class="update-btn">
+							<button class="btn" id="update-btn" onclick="autoUpdate()">立即更新</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="updateTips2">
+		<div id="update-app2">
+			<div class="process">
+				<div class="masks"></div>
+				<div class="contents">
+					<div class="bgTitle">
+						<div class="before">
+							<span class="s1">系统更新</span>
+						</div>
+
+						<div style="font-size: 12px; overflow: hidden;color: #fff;">
+							<div class="s2"></div>
+						</div>
+
+					</div>
+					<div class="bgCenter2">
+						<div>金财管家<span id="update-version"></span></div>
+						<div>内容1：</div>
+						<div>修复了一些已知问题。</div>
+					</div>
+					<div class="bgFooter">
+						<div class="update-btn">
+							<button class="btn" id="update-btn" onclick="autoUpdate2()">立即更新</button>
+							<button class="btn2" id="update-cancel" onclick="cancelUpdate()">稍后再说</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<script>
+		/** URL   edfx-app-login
+		 * 办税助手线上 https://erp.jchl.com/#/edfx-app-root/ttk-zs-app-login
+		 * 办税助手test http://test.bj.jchl.com:8089/#/edfx-app-root/ttk-zs-app-login
+		 * 金财代账线上	https://jcdz.jchl.com
+		*/
 		const { ipcRenderer } = require('electron');
 		window.ttkclient = true;
-		let iframe = document.getElementById('electron-iframe')
+		let iframe = document.getElementById('electron-iframe');
 
 		window.addEventListener('resize', (e) => {
-			iframe.style.height = (window.innerHeight - 16) + 'px'
+			iframe.style.height = (window.innerHeight - 16) + 'px';
 		})
 
 		window.addEventListener('message', (event) => {
 			if (event.data && event.data.windowMax) {
-				ipcRenderer.send('icpRender-message', 'icpRender-message')
+				ipcRenderer.send('icpRender-message', 'icpRender-message');
 			}
 			if (event.data && event.data.pdfPrint) {
-				ipcRenderer.send('icpRender-pdfPrint', event.data.url)
+				ipcRenderer.send('icpRender-pdfPrint', event.data.url);
 			}
 			if (event.data && event.data.openNewWin) {
-				ipcRenderer.send('icpRender-newWin', event.data.url)
+				ipcRenderer.send('icpRender-newWin', event.data.url);
 			}
 			if (event.data && event.data.downloadsth) {
-				ipcRenderer.send('icpRender-download', event.data.url)
+				ipcRenderer.send('icpRender-download', event.data.url);
 			}
 			if (event.data && event.data.pdfLoad) {
 				ipcRenderer.send('icpRender-pdfLoad', event.data.url)
@@ -42,17 +112,18 @@
 		})
 
 		window.onload = () => {
-			ipcRenderer.send('main-window-onlaod', 'main-window-onlaod')
+			ipcRenderer.send('main-window-onlaod', 'main-window-onlaod');
 
 			let frame = window.frames['electron-iframe'];
 			frame.contentWindow.postMessage('electron-app', '*');
 		}
 		ipcRenderer.on('main-window-hidden', (event, arg) => {
 			if (arg === 'hidden') {
-				let mainWindow = document.getElementById('electron-main-window')
-				mainWindow.style.display = 'none'
+				let mainWindow = document.getElementById('electron-main-window');
+				mainWindow.style.display = 'none';
 			}
 		})</script>
+	<script src="./renderer.js"></script>
 </body>
 
 </html>
