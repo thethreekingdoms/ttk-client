@@ -19,7 +19,7 @@ import Screenshots from 'electron-screenshots'
 // log.transports.console.level = false
 // log.transports.console.level = 'silly'
 
-// const updateURL = 'http://127.0.0.1:8080/packages/download/'
+// const updateURL = 'https://ttk-prod-client-update.oss-cn-beijing.aliyuncs.com/download/'
 export default class ttkclient {
   // app对象是否ready
   _ready = null

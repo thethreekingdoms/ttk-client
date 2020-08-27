@@ -13,7 +13,7 @@ let lastUrl
 let time = Date.now()
 const isMac = process.platform === 'darwin'
 
-const feedUrl = "http://127.0.0.1:8080/packages/download/"
+const feedUrl = "https://ttk-prod-client-update.oss-cn-beijing.aliyuncs.com/download/"
 
 /**
  * 打开外部链接
@@ -246,7 +246,7 @@ export default ttkclient => () => {
     $win.webContents.downloadURL(args)
   })
 
-  download($win)
+  download($win);
   // 加载URL地址
   // $win.loadURL('http://test.aierp.cn:8089/#/edfx-app-root/ttk-zs-app-login')
   console.log('env:', process.env.NODE_ENV)
@@ -256,11 +256,8 @@ export default ttkclient => () => {
     : `file://${path.join(app.getAppPath(), './dist/renderer/index.html')}`
   // const loadFileUrl = path.join(__dirname, '../renderer/index.html')
   $win.loadURL(loadFileUrl)
-
-
   return $win
 }
-
 
 function createMenu() {
   // Menu
@@ -345,13 +342,6 @@ function handleUpdate(e) {
     sendUpdateMessage({ action: 'download-progress', updateInfo: progressObj })
   })
 
-  /**
-   * event Event
-   * releaseNotes String - 新版本更新公告
-   * releaseName String - 新的版本号
-   * releaseDate Date - 新版本发布的日期
-   * updateUrl String - 更新地址
-   */
   autoUpdater.on('update-downloaded', (info) => {
     sendUpdateMessage({ action: 'downloadProgress', updateInfo: info })
     // 下载太快可能无法触发downloadProgress事件，所以手动通知一下
@@ -369,11 +359,8 @@ function handleUpdate(e) {
   })
 
   ipcMain.on('checkForUpdate', () => {
-    console.log('checkForUpdate1')
+    // console.log('checkForUpdate1')
     // 执行自动更新检查
     autoUpdater.checkForUpdates()
   })
-
-
 }
-

@@ -7,6 +7,7 @@ ipcRenderer.on("updateMessage", function (event, data) {
     // console.log(data,message);
     if (data.action == "updateAva") {
         document.getElementById("update-app").style.display = "block";
+        document.getElementById("updateTips2").style.display = "block";
         if (message.version) {
             // console.log("正在更新到最新版本：v "+message.version);
             document.getElementById("update-version").innerText = message.version || '';
@@ -14,10 +15,13 @@ ipcRenderer.on("updateMessage", function (event, data) {
     }
     else if (data.action == "updateNotAva") {
         document.getElementById("updateTips").style.display = "none";
+        document.getElementById("updateTips2").style.display = "none";
         // console.log("暂无可更新的版本：v "+message.version);
         // document.getElementById("update-app").style.display = "block";
     }
     else if (data.action == "download-progress") {
+        document.getElementById("updateTips2").style.display = "none";
+
         document.getElementById("update-version").innerText = message.version || '';
         document.getElementById("update-progress").value = Number(message.percent);
         Upd_percent = Number(message.percent);

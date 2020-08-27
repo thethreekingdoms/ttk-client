@@ -65,11 +65,13 @@
     padding-left: 8px;
 }
 .s2{
-    background-image: url('../../resources/banner.jpg');
+    background-image: url('https://static-erp.jchl.com/vendor/img/standard/logo_erp.png');
+    
     background-position: center;
     margin: 10px auto;
-    height: 45px;
+    height: 60px;
     background-repeat: no-repeat;
+    zoom: 0.8;
 }
 .process .contents .nextVersion{
     font-size: 12px;

@@ -1,6 +1,6 @@
 {
-  "name": "ttk-electron-client",
-  "version": "0.0.2",
+  "name": "guanjia",
+  "version": "0.0.0",
   "description": "金财互联数据服务有限公司 粤ICP备14007298号",
   "author": "金财互联数据服务有限公司",
   "main": "dist/main.js",
@@ -20,7 +20,6 @@
     "release": "electron-builder"
   },
   "keywords": [
-    "platform",
     "linux",
     "macOS",
     "Windows"
@@ -83,9 +82,9 @@
     "webpack-merge": "^4.2.2"
   },
   "build": {
-    "appId": "com.electron.platform",
+    "appId": "com.electron.jcgj",
     "productName": "金财管家",
-    "artifactName": "platform-${version}-${channel}-${arch}.${ext}",
+    "artifactName": "guanjia-${version}-${channel}-${arch}.${ext}",
     "copyright": "Copyright © 金财管家2020",
     "asar": true,
     "directories": {
@@ -100,8 +99,8 @@
     "publish": {
       "provider": "generic",
       "owner": "jeffycai",
-      "repo": "platform",
-      "url": "http://127.0.0.1:8080/packages/download/"
+      "repo": "jcgj",
+      "url": ""
     },
     "dmg": {
       "contents": [
@@ -119,10 +118,7 @@
       ]
     },
     "mac": {
-      "target": [
-        "dmg",
-        "zip"
-      ],
+      "target": ["dmg","zip"],
       "icon": "./resources/icons/icon.icns",
       "category": "public.app-category.instant-messaging",
       "artifactName": "${productName}_setup_${version}.${ext}"
@@ -169,7 +165,7 @@
           ]
         }
       ],
-      "executableName": "platform",
+      "executableName": "jcgj",
       "icon": "./resources/icons",
       "category": "InstantMessaging;Network"
     },
@@ -177,7 +173,7 @@
       "oneClick": false,
       "perMachine": true,
       "allowToChangeInstallationDirectory": true,
-      "displayLanguageSelector": true,
+      "displayLanguageSelector": false,
       "language": 2052,
       "include": "build/installer.nsh"
     }
@@ -185,10 +181,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jeffycai/platform.git"
+    "url": "git+https://github.com/jeffycai/jcgj.git"
   },
   "bugs": {
-    "url": "https://github.com/jeffycai/platform/issues"
+    "url": "https://github.com/jeffycai/jcgj/issues"
   },
   "homepage": "https://erp.jchl.com/#/edfx-app-root/edfx-app-agreement"
 }

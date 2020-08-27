@@ -1,12 +1,13 @@
 // const { ipcRenderer } = require("electron");
 var Upd_lock = false;
+var _initSTATUS = true;
 var Upd_percent = 0;
 
 ipcRenderer.on("staticData", function (event, data) {
     // 获取配置项数据
     if (data.version) {
-        document.getElementById("current-version").innerText = data.version;
-        document.getElementById("update-version").innerText = data.version || '';
+        // document.getElementById("current-version").innerText = data.version;
+        // document.getElementById("update-version").innerText = data.version || '';
         if (typeof window.updateVerson == 'function') document.getElementById("app").innerText = data.version;
     }
 })
@@ -14,9 +15,11 @@ ipcRenderer.on("staticData", function (event, data) {
 ipcRenderer.on("updateMessage", function (event, data) {
     data = data || {};
     var message = data.updateInfo || {};
+    if(!_initSTATUS) return
     // console.log(data,message);
     if (data.action == "updateAva") {
         document.getElementById("update-app").style.display = "block";
+        document.getElementById("updateTips2").style.display = "block";
         if (message.version) {
             // console.log("正在更新到最新版本：v "+message.version);
             document.getElementById("update-version").innerText = message.version || '';
@@ -28,7 +31,7 @@ ipcRenderer.on("updateMessage", function (event, data) {
         // document.getElementById("update-app").style.display = "block";
     }
     else if (data.action == "download-progress") {
-        document.getElementById("update-version").innerText = message.version || '';
+        // document.getElementById("update-version").innerText = message.version || '';
         document.getElementById("update-progress").value = Number(message.percent);
         Upd_percent = Number(message.percent);
     }
@@ -37,13 +40,13 @@ ipcRenderer.on("updateMessage", function (event, data) {
         document.getElementById("updateTips").style.display = "none";
         document.getElementById("updateTips2").style.display = "none";
         if (Upd_percent == 100) {
-            document.getElementById("update-version").innerText = message.version || '';
+            // document.getElementById("update-version").innerText = message.version || '';
             ipcRenderer.send('isUpdateNow');
         }
         else if (Upd_percent == 0) {
             // document.getElementById("update-btn").innerText = "安装包已下载,立即更新";
             Upd_percent = Number(100);
-            document.getElementById("update-version").innerText = message.version || '';
+            // document.getElementById("update-version").innerText = message.version || '';
             ipcRenderer.send('isUpdateNow');
         }
     }
@@ -57,9 +60,18 @@ ipcRenderer.on("updateMessage", function (event, data) {
     }
 })
 // clearTimeout(__timer)
-setTimeout(function () {
-    autoUpdate()
-}, 500);
+
+var __timeout__ = null
+window.onload=()=>{
+    __timeout__= setTimeout(function () {
+        autoUpdate()
+    }, 1000);
+}
+
+window.onunload=()=>{
+    clearTimeout(__timeout__)
+}
+
 
 function autoUpdate() {
     if (Upd_lock) return false;
@@ -75,5 +87,6 @@ function autoUpdate2() {
 }
 function cancelUpdate() {
     document.getElementById("updateTips2").style.display = "none";
+    _initSTATUS=false;
 }
 

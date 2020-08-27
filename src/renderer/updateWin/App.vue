@@ -26,7 +26,7 @@
         </div>
       </div>
     </div>
-    <div id="updateTips2">
+    <div id="updateTips2" style="display:none">
       <div id="update-app2">
         <div class="process">
           <div class="masks"></div>
@@ -45,8 +45,9 @@
                 金财管家
                 <span id="update-version"></span>
               </div>
-              <div>内容1：</div>
-              <div>修复了一些已知问题。</div>
+             <div>内容1：</div>
+						<div>修复了一些已知问题。</div>
+						<div>支持了客户端升级。</div>
             </div>
             <div class="bgFooter">
               <div class="update-btn">
@@ -133,7 +134,7 @@ export default {
   top: 50%;
   width: 630px;
   margin: 0 auto;
-  margin-top: -150px;
+  margin-top: -200px;
   background-color: #ffffff;
   box-sizing: border-box;
   border: 1px solid #d3d3d3;
@@ -167,10 +168,11 @@ export default {
   padding-left: 8px;
 }
 .s2 {
-  background-image: url("../../../resources/banner.jpg");
+  background-image: url('https://static-erp.jchl.com/vendor/img/standard/logo_erp.png');
   background-position: center;
   margin: 10px auto;
-  height: 45px;
+  height: 60px;
+  zoom: 0.8;
   background-repeat: no-repeat;
 }
 .process .contents .nextVersion {

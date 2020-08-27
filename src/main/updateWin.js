@@ -8,7 +8,7 @@ import { app, BrowserWindow, ipcMain, dialog, ipcRenderer } from 'electron'
 // log.transports.console.level = false
 // log.transports.console.level = 'silly'
 const pkg = require('../../package.json')
-const feedUrl = "http://127.0.0.1:8080/packages/download/"
+const feedUrl = "https://ttk-prod-client-update.oss-cn-beijing.aliyuncs.com/download/"
 const autoUpdater = require('electron-updater').autoUpdater;
 
 export default ttkclient => () => {
@@ -20,7 +20,7 @@ export default ttkclient => () => {
   const $win = new BrowserWindow({
     title: "升级",
     width: 630,
-    height: 420,
+    height: 398,
     useContentSize: true,
     resizable: false,
     menu: false,
@@ -55,8 +55,6 @@ export default ttkclient => () => {
 
 
   handleUpdate($win)
-
-
   // 右键上下文菜单
   $win.webContents.on('context-menu', (e, params) => {
     e.preventDefault()
@@ -121,6 +119,7 @@ function handleUpdate(e) {
 
   // 更新下载进度事件
   autoUpdater.on('download-progress', (progressObj) => {
+    // console.log('download ...')
     sendUpdateMessage({ action: 'download-progress', updateInfo: progressObj })
   })
 
@@ -142,18 +141,20 @@ function handleUpdate(e) {
   })
 
   ipcMain.on('checkForUpdate', () => {
-    // console.log('1111111');
     autoUpdater.checkForUpdates();
   })
 
   ipcMain.on('downloadUpdate', () => {
-    // console.log('downloadUpdate')
+    // console.log('begin download package')
     autoUpdater.downloadUpdate();
   })
   ipcMain.on('window-close', () => {
     // console.log('close close')
-    e.close();
+    e.hide();
   })
+  // $win.on('closed', () => {
+   
+  // })
 
 
   // //执行自动更新检查
